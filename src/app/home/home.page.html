@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      WeterApp
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-item>
+      <ion-label position="stacked">Ort</ion-label>
+      <ion-input type="search" clearInput="true" debounce="300" (ionChange)="aktualisiereAnsicht()"></ion-input>
+    </ion-item>
+  </div>
+  <div class="ion-padding" *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-card *ngIf="fehler" color="danger">
+    <ion-card-header>
+      <ion-card-title>Fehler aufgetreten</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{fehler}}</ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="wetter">
+    <ion-card-header>
+      <ion-card-title>Weter in {{wetter.location.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Aktuell</h2>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-img [src]="wetter.current.condition.icon" style="width: 32px"></ion-img>
+        </ion-col>
+        <ion-col>
+          {{wetter.current.condition.text}} bei {{wetter.current.temp_c}}°C
+        </ion-col>
+      </ion-row>
+      <h2>Vorhersage</h2>
+      <ion-row class="ion-align-items-center" *ngFor="let vorhersage of wetter.forecast.forecastday">
+        <ion-col size="2">
+          <ion-img [src]="vorhersage.day.condition.icon" style="width: 32px"></ion-img>
+        </ion-col>
+        <ion-col>
+          {{vorhersage.day.condition.text}} bei {{vorhersage.day.maxtemp_c}}°C
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

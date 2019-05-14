@@ -6,9 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'start.component.html'
 })
-export class AppComponent {
+export class StartComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
